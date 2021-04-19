@@ -15,9 +15,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import com.netflix.appinfo.InstanceInfo;
-import com.netflix.discovery.EurekaClient;
-import com.netflix.discovery.shared.Application;
 import com.tomtom.ecommerce.constants.ECommerceConstants;
 import com.tomtom.ecommerce.exception.ECommerceCartException;
 import com.tomtom.ecommerce.exception.EmptyCartECommerceException;
@@ -38,9 +35,9 @@ import com.tomtom.ecommerce.repository.OrderDataAccessRepository;
  */
 @Service
 @Transactional
-public class ECommerceServiceImpl implements ECommerceOrderService {
+public class ECommerceOrderServiceImpl implements ECommerceOrderService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ECommerceServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ECommerceOrderServiceImpl.class);
 
 	@Value("${ecommerce.product.api.name}")
 	private String ecommerceProductApiName;
@@ -48,38 +45,29 @@ public class ECommerceServiceImpl implements ECommerceOrderService {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	@Autowired
-	private EurekaClient eurekaClient;
-
 	@Value("${ecommerce.cart.api.name}")
 	private String ecommerceCartApiName;
 	
 	private final OrderDataAccessRepository orderDataAccessRepository;
 	
 	@Autowired
-	public ECommerceServiceImpl(OrderDataAccessRepository orderDataAccessRepository) {
+	public ECommerceOrderServiceImpl(OrderDataAccessRepository orderDataAccessRepository) {
 		super();
 		this.orderDataAccessRepository = orderDataAccessRepository;
 	}
 	
-	private String productApiURL() {
-		Application application = eurekaClient.getApplication(ecommerceProductApiName);
-		InstanceInfo instanceInfo = application.getInstances().get(0);
-		return "http://" + instanceInfo.getIPAddr() + ":" + instanceInfo.getPort() + "/"+ecommerceProductApiName;
-
+	private String getProductApiURL(){
+		return "http://" +ecommerceProductApiName +"/product/";
 	}
 	
 	private String cartApiURL() {
-		Application application = eurekaClient.getApplication(ecommerceCartApiName);
-		InstanceInfo instanceInfo = application.getInstances().get(0);
-		return "http://" + instanceInfo.getIPAddr() + ":" + instanceInfo.getPort() + "/"+ecommerceCartApiName;
-
+		return "http://" +ecommerceCartApiName;
 	}
 
 	//Gets product details from ecommerce-product-api
 	public Product getProduct(Integer productId) throws ProductNotFoundECommerceException  {
 		LOGGER.debug("Trying to get product if{}" ,productId);
-		Optional<ResponseStatus> responseStatus = Optional.ofNullable(restTemplate.getForObject(productApiURL() + "/product/"+productId, ResponseStatus.class));
+		Optional<ResponseStatus> responseStatus = Optional.ofNullable(restTemplate.getForObject(this.getProductApiURL() + "/product/"+productId, ResponseStatus.class));
 		if(responseStatus.isPresent() && !responseStatus.get().getProducts().isEmpty() &&
 				responseStatus.get().getProducts()!=null && responseStatus.get().getProducts().stream().findFirst().isPresent()){
 			LOGGER.debug("Product found for product id {}" ,productId);
@@ -90,7 +78,7 @@ public class ECommerceServiceImpl implements ECommerceOrderService {
 	}
 
 	public void saveProduct(Product product) throws PriceMisMatchECommerceException {
-		ResponseEntity<ResponseStatus> responseStatus = restTemplate.postForEntity(productApiURL() + "/seller/product", product, ResponseStatus.class);
+		ResponseEntity<ResponseStatus> responseStatus = restTemplate.postForEntity(this.getProductApiURL() + "/seller/product", product, ResponseStatus.class);
 		if(!ECommerceConstants.SUCCESS.equals(responseStatus.getBody().getStatus())){
 			throw new PriceMisMatchECommerceException(responseStatus.getBody().getMessages().get(0));
 		}

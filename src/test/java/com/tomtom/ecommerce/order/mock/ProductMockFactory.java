@@ -1,10 +1,11 @@
-package com.tomtom.ecommerce.mock;
+package com.tomtom.ecommerce.order.mock;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.tomtom.ecommerce.model.Product;
+import com.tomtom.ecommerce.model.ResponseStatus;
 
 public class ProductMockFactory {
 
@@ -33,6 +34,14 @@ public class ProductMockFactory {
 		product.setProductPrice(productPrice);
 		product.setProductQuantity(productQuantity);
 		return product;
+	}
+	
+	public static ResponseStatus getResponseStatusProduct(Product inputproduct) {
+		ResponseStatus responseStatus = new ResponseStatus();
+		List<Product> products = new ArrayList<>();
+		products.add(inputproduct);
+		responseStatus.setProducts(products);
+		return responseStatus;
 	}
 
 }

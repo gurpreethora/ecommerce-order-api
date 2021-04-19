@@ -1,4 +1,4 @@
-package com.tomtom.ecommerce.controller;
+package com.tomtom.ecommerce.order.controller;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,17 +15,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.tomtom.ecommerce.constants.ECommerceConstants;
+import com.tomtom.ecommerce.controller.OrderController;
 import com.tomtom.ecommerce.exception.ECommerceCartException;
 import com.tomtom.ecommerce.exception.EmptyCartECommerceException;
 import com.tomtom.ecommerce.exception.NoOrdersFoundECommerceException;
 import com.tomtom.ecommerce.exception.PriceMisMatchECommerceException;
 import com.tomtom.ecommerce.exception.ProductNotFoundECommerceException;
-import com.tomtom.ecommerce.mock.CartDetailsMockFactory;
-import com.tomtom.ecommerce.mock.OrderDetailsMockFactory;
 import com.tomtom.ecommerce.model.CartDetails;
 import com.tomtom.ecommerce.model.OrderDetails;
 import com.tomtom.ecommerce.model.PaymentMode;
 import com.tomtom.ecommerce.model.ResponseStatus;
+import com.tomtom.ecommerce.order.mock.CartDetailsMockFactory;
+import com.tomtom.ecommerce.order.mock.OrderDetailsMockFactory;
 import com.tomtom.ecommerce.service.ECommerceOrderService;
 @ExtendWith(MockitoExtension.class)
 public class OrderControllerTest {

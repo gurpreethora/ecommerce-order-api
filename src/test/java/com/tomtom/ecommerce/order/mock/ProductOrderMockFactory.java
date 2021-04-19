@@ -1,4 +1,4 @@
-package com.tomtom.ecommerce.mock;
+package com.tomtom.ecommerce.order.mock;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

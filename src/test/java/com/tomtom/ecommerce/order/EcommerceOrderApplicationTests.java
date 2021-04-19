@@ -1,4 +1,4 @@
-package com.tomtom.ecommerce;
+package com.tomtom.ecommerce.order;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
