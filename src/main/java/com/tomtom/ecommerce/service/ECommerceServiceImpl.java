@@ -90,7 +90,7 @@ public class ECommerceServiceImpl implements ECommerceOrderService {
 	}
 
 	public void saveProduct(Product product) throws PriceMisMatchECommerceException {
-		ResponseEntity<ResponseStatus> responseStatus = restTemplate.postForEntity(productApiURL() + "/product/", product, ResponseStatus.class);
+		ResponseEntity<ResponseStatus> responseStatus = restTemplate.postForEntity(productApiURL() + "/seller/product", product, ResponseStatus.class);
 		if(!ECommerceConstants.SUCCESS.equals(responseStatus.getBody().getStatus())){
 			throw new PriceMisMatchECommerceException(responseStatus.getBody().getMessages().get(0));
 		}
@@ -116,7 +116,7 @@ public class ECommerceServiceImpl implements ECommerceOrderService {
 	//Gets User Cart details from ecommerce-cart-api
 		public OrderDetails getUserCart(String userId) throws ECommerceCartException  {
 			LOGGER.debug("Trying to get userCart for user {}" ,userId);
-			Optional<ResponseStatus> responseStatus = Optional.ofNullable(restTemplate.getForObject(cartApiURL()+"/user/" +userId+ "/cart", ResponseStatus.class));
+			Optional<ResponseStatus> responseStatus = Optional.ofNullable(restTemplate.getForObject(cartApiURL()+"/user/" +userId+ "/cart/", ResponseStatus.class));
 			if(responseStatus.isPresent() && responseStatus.get().getOrderDetails()!=null){
 				LOGGER.debug("User Cart found for user id {}" ,userId);
 				return  responseStatus.get().getOrderDetails();
@@ -189,6 +189,6 @@ public class ECommerceServiceImpl implements ECommerceOrderService {
 
 	
 	public void deleteUserCart(String userId) {
-		 restTemplate.delete(cartApiURL()+"/cart", userId);
+		 restTemplate.delete(cartApiURL()+"/user/cart/"+userId);
 	}
 }
