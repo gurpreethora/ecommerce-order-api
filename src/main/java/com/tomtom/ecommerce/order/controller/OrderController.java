@@ -1,4 +1,4 @@
-package com.tomtom.ecommerce.controller;
+package com.tomtom.ecommerce.order.controller;
 
 import java.util.List;
 
@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tomtom.ecommerce.builder.ECommerceResponseBuilder;
-import com.tomtom.ecommerce.constants.ECommerceConstants;
-import com.tomtom.ecommerce.model.CartDetails;
-import com.tomtom.ecommerce.model.OrderDetails;
-import com.tomtom.ecommerce.model.ResponseStatus;
-import com.tomtom.ecommerce.service.ECommerceOrderService;
+import com.tomtom.ecommerce.order.builder.ECommerceResponseBuilder;
+import com.tomtom.ecommerce.order.constants.ECommerceConstants;
+import com.tomtom.ecommerce.order.model.CartDetails;
+import com.tomtom.ecommerce.order.model.OrderDetails;
+import com.tomtom.ecommerce.order.model.ResponseStatus;
+import com.tomtom.ecommerce.order.service.ECommerceOrderService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

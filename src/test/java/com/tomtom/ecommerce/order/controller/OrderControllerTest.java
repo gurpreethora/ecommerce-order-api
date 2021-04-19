@@ -14,20 +14,19 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.tomtom.ecommerce.constants.ECommerceConstants;
-import com.tomtom.ecommerce.controller.OrderController;
-import com.tomtom.ecommerce.exception.ECommerceCartException;
-import com.tomtom.ecommerce.exception.EmptyCartECommerceException;
-import com.tomtom.ecommerce.exception.NoOrdersFoundECommerceException;
-import com.tomtom.ecommerce.exception.PriceMisMatchECommerceException;
-import com.tomtom.ecommerce.exception.ProductNotFoundECommerceException;
-import com.tomtom.ecommerce.model.CartDetails;
-import com.tomtom.ecommerce.model.OrderDetails;
-import com.tomtom.ecommerce.model.PaymentMode;
-import com.tomtom.ecommerce.model.ResponseStatus;
+import com.tomtom.ecommerce.order.constants.ECommerceConstants;
+import com.tomtom.ecommerce.order.exception.ECommerceCartException;
+import com.tomtom.ecommerce.order.exception.EmptyCartECommerceException;
+import com.tomtom.ecommerce.order.exception.NoOrdersFoundECommerceException;
+import com.tomtom.ecommerce.order.exception.PriceMisMatchECommerceException;
+import com.tomtom.ecommerce.order.exception.ProductNotFoundECommerceException;
 import com.tomtom.ecommerce.order.mock.CartDetailsMockFactory;
 import com.tomtom.ecommerce.order.mock.OrderDetailsMockFactory;
-import com.tomtom.ecommerce.service.ECommerceOrderService;
+import com.tomtom.ecommerce.order.model.CartDetails;
+import com.tomtom.ecommerce.order.model.OrderDetails;
+import com.tomtom.ecommerce.order.model.PaymentMode;
+import com.tomtom.ecommerce.order.model.ResponseStatus;
+import com.tomtom.ecommerce.order.service.ECommerceOrderService;
 @ExtendWith(MockitoExtension.class)
 public class OrderControllerTest {
 	

@@ -1,4 +1,4 @@
-package com.tomtom.ecommerce.exception;
+package com.tomtom.ecommerce.order.exception;
 
 public class EmptyCartECommerceException extends Exception {
 	private static final long serialVersionUID = -1713744850525155427L;

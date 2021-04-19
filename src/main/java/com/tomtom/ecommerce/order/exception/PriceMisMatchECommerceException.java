@@ -1,4 +1,4 @@
-package com.tomtom.ecommerce.exception;
+package com.tomtom.ecommerce.order.exception;
 
 public class PriceMisMatchECommerceException extends Exception {
 

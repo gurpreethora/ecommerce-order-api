@@ -9,8 +9,7 @@ import static org.mockito.Mockito.verify;
 import org.junit.Test;
 import org.springframework.validation.Errors;
 
-import com.tomtom.ecommerce.model.CartDetails;
-import com.tomtom.ecommerce.validator.ECommerceValidator;
+import com.tomtom.ecommerce.order.model.CartDetails;
 
 public class ECommerceValidatorTest {
 

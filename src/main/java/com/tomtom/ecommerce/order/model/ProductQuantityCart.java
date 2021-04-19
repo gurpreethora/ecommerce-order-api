@@ -1,4 +1,4 @@
-package com.tomtom.ecommerce.model;
+package com.tomtom.ecommerce.order.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

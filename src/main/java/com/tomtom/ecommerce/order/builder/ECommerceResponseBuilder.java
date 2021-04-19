@@ -1,4 +1,4 @@
-package com.tomtom.ecommerce.builder;
+package com.tomtom.ecommerce.order.builder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.tomtom.ecommerce.model.OrderDetails;
-import com.tomtom.ecommerce.model.Product;
-import com.tomtom.ecommerce.model.ResponseStatus;
+import com.tomtom.ecommerce.order.model.OrderDetails;
+import com.tomtom.ecommerce.order.model.Product;
+import com.tomtom.ecommerce.order.model.ResponseStatus;
 
 public final class ECommerceResponseBuilder {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ECommerceResponseBuilder.class);
@@ -20,7 +20,7 @@ public final class ECommerceResponseBuilder {
 	}
 
 	public static ResponseEntity<ResponseStatus> buildResponse(String status, HttpStatus httpStatus, Object... objects) {
-		com.tomtom.ecommerce.model.ResponseStatus responseStatus = createResponse(status);
+		com.tomtom.ecommerce.order.model.ResponseStatus responseStatus = createResponse(status);
 		if(objects != null) {
 			for(Object object : objects) {
 

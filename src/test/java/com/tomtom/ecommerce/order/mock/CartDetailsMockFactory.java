@@ -2,8 +2,8 @@ package com.tomtom.ecommerce.order.mock;
 
 import java.math.BigDecimal;
 
-import com.tomtom.ecommerce.model.CartDetails;
-import com.tomtom.ecommerce.model.PaymentMode;
+import com.tomtom.ecommerce.order.model.CartDetails;
+import com.tomtom.ecommerce.order.model.PaymentMode;
 
 public class CartDetailsMockFactory {
 

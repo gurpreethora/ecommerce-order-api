@@ -1,4 +1,4 @@
-package com.tomtom.ecommerce.exception;
+package com.tomtom.ecommerce.order.exception;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.tomtom.ecommerce.model.ProductQuantityCart;
+import com.tomtom.ecommerce.order.model.ProductQuantityCart;
 
 public class ProductQuantityMockFactory {
 

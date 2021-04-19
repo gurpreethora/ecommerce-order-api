@@ -1,12 +1,12 @@
-package com.tomtom.ecommerce.validator;
+package com.tomtom.ecommerce.order.validator;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.tomtom.ecommerce.model.CartDetails;
-import com.tomtom.ecommerce.model.PaymentMode;
+import com.tomtom.ecommerce.order.model.CartDetails;
+import com.tomtom.ecommerce.order.model.PaymentMode;
 
 @Configurable
 public class ECommerceValidator implements Validator {

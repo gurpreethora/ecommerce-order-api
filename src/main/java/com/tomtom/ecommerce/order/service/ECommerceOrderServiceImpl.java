@@ -1,4 +1,4 @@
-package com.tomtom.ecommerce.service;
+package com.tomtom.ecommerce.order.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -15,19 +15,19 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import com.tomtom.ecommerce.constants.ECommerceConstants;
-import com.tomtom.ecommerce.exception.ECommerceCartException;
-import com.tomtom.ecommerce.exception.EmptyCartECommerceException;
-import com.tomtom.ecommerce.exception.NoOrdersFoundECommerceException;
-import com.tomtom.ecommerce.exception.PriceMisMatchECommerceException;
-import com.tomtom.ecommerce.exception.ProductNotFoundECommerceException;
-import com.tomtom.ecommerce.model.CartDetails;
-import com.tomtom.ecommerce.model.OrderDetails;
-import com.tomtom.ecommerce.model.Product;
-import com.tomtom.ecommerce.model.ProductOrder;
-import com.tomtom.ecommerce.model.ProductQuantityCart;
-import com.tomtom.ecommerce.model.ResponseStatus;
-import com.tomtom.ecommerce.repository.OrderDataAccessRepository;
+import com.tomtom.ecommerce.order.constants.ECommerceConstants;
+import com.tomtom.ecommerce.order.exception.ECommerceCartException;
+import com.tomtom.ecommerce.order.exception.EmptyCartECommerceException;
+import com.tomtom.ecommerce.order.exception.NoOrdersFoundECommerceException;
+import com.tomtom.ecommerce.order.exception.PriceMisMatchECommerceException;
+import com.tomtom.ecommerce.order.exception.ProductNotFoundECommerceException;
+import com.tomtom.ecommerce.order.model.CartDetails;
+import com.tomtom.ecommerce.order.model.OrderDetails;
+import com.tomtom.ecommerce.order.model.Product;
+import com.tomtom.ecommerce.order.model.ProductOrder;
+import com.tomtom.ecommerce.order.model.ProductQuantityCart;
+import com.tomtom.ecommerce.order.model.ResponseStatus;
+import com.tomtom.ecommerce.order.repository.OrderDataAccessRepository;
 
 /**
  * @author Gurpreet Hora

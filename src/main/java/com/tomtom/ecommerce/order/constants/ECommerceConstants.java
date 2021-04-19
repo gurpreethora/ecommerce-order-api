@@ -1,4 +1,4 @@
-package com.tomtom.ecommerce.constants;
+package com.tomtom.ecommerce.order.constants;
 
 public class ECommerceConstants {
 	public static final String SUCCESS = "Success";

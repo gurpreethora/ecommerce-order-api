@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.tomtom.ecommerce.model.Product;
-import com.tomtom.ecommerce.model.ResponseStatus;
+import com.tomtom.ecommerce.order.model.Product;
+import com.tomtom.ecommerce.order.model.ResponseStatus;
 
 public class ProductMockFactory {
 
