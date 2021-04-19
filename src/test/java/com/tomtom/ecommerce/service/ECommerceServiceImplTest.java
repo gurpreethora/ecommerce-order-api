@@ -18,6 +18,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.tomtom.ecommerce.exception.ECommerceCartException;
 import com.tomtom.ecommerce.exception.EmptyCartECommerceException;
 import com.tomtom.ecommerce.exception.NoOrdersFoundECommerceException;
 import com.tomtom.ecommerce.exception.PriceMisMatchECommerceException;
@@ -49,13 +50,13 @@ public class ECommerceServiceImplTest {
 
 	@Before
 	public void initMocks() {
-		MockitoAnnotations.openMocks(this);
+		MockitoAnnotations.initMocks(this);
 	}
 
 	private final String USER_ID = "userId";
 	
 	@Test
-	public void addProductTest() throws PriceMisMatchECommerceException {
+	public void addProductTest() throws PriceMisMatchECommerceException, ProductNotFoundECommerceException {
 		Optional<Product> product = Optional.ofNullable(ProductMockFactory.getDummyValuedProduct());
 		when(productDataAccessRepository.findById(product.get().getProductId())).thenReturn(product);
 		when(productDataAccessRepository.save(Mockito.any(Product.class))).thenReturn(new Product());
@@ -64,7 +65,7 @@ public class ECommerceServiceImplTest {
 	}
 	
 	@Test(expected = PriceMisMatchECommerceException.class)
-	public void addProduct_PriceMisMatchECommerceExceptionTest() throws PriceMisMatchECommerceException {
+	public void addProduct_PriceMisMatchECommerceExceptionTest() throws PriceMisMatchECommerceException, ProductNotFoundECommerceException {
 		Optional<Product> product = Optional.ofNullable(ProductMockFactory.getDummyValuedProduct());
 		Product productWithPriceDiff = ProductMockFactory.getDummyValuedProduct();
 		productWithPriceDiff.setProductPrice(BigDecimal.ZERO);
@@ -93,7 +94,7 @@ public class ECommerceServiceImplTest {
 	
 	
 	@Test
-	public void getUserCartTest() throws EmptyCartECommerceException, ProductNotFoundECommerceException{
+	public void getUserCartTest() throws EmptyCartECommerceException, ProductNotFoundECommerceException, ECommerceCartException{
 		CartDetails cartDetails = CartDetailsMockFactory.getDummyValuedCartDetails();
 		Product product1 = ProductMockFactory.getProduct("product1", 1, 5, BigDecimal.TEN);
 		Product product2 = ProductMockFactory.getProduct("product2", 2, 10, BigDecimal.ONE);
@@ -116,20 +117,20 @@ public class ECommerceServiceImplTest {
 	}
 	
 	@Test (expected = EmptyCartECommerceException.class)
-	public void getUserCart_EmptyCartECommerceExceptionTest() throws EmptyCartECommerceException, ProductNotFoundECommerceException{
+	public void getUserCart_EmptyCartECommerceExceptionTest() throws EmptyCartECommerceException, ProductNotFoundECommerceException, ECommerceCartException{
 		when(cartDataAccessRepository.findById(USER_ID)).thenReturn(Optional.ofNullable(null));
 		eCommerceServiceImpl.getUserCart(USER_ID);
 	}
 	
 	@Test (expected = ProductNotFoundECommerceException.class)
-	public void getUserCart_ProductNotFoundECommerceExceptionTest() throws EmptyCartECommerceException, ProductNotFoundECommerceException{
+	public void getUserCart_ProductNotFoundECommerceExceptionTest() throws EmptyCartECommerceException, ProductNotFoundECommerceException, ECommerceCartException{
 		CartDetails cartDetails = CartDetailsMockFactory.getDummyValuedCartDetails();
 		when(cartDataAccessRepository.findById(USER_ID)).thenReturn(Optional.ofNullable(cartDetails));
 		eCommerceServiceImpl.getUserCart(USER_ID);
 	}
 	
 	@Test
-	public void placeOrderTest() throws ProductNotFoundECommerceException, PriceMisMatchECommerceException, EmptyCartECommerceException {
+	public void placeOrderTest() throws ProductNotFoundECommerceException, PriceMisMatchECommerceException, EmptyCartECommerceException, ECommerceCartException {
 		CartDetails cartDetails = CartDetailsMockFactory.getDummyValuedCartDetails();
 		Product product1 = ProductMockFactory.getProduct("product1", 1, 5, BigDecimal.TEN);
 		Product product2 = ProductMockFactory.getProduct("product2", 2, 10, BigDecimal.ONE);
@@ -145,7 +146,7 @@ public class ECommerceServiceImplTest {
 	}
 	
 	@Test (expected = ProductNotFoundECommerceException.class)
-	public void placeOrder_ProductNotFoundECommerceExceptionTest() throws ProductNotFoundECommerceException, PriceMisMatchECommerceException, EmptyCartECommerceException {
+	public void placeOrder_ProductNotFoundECommerceExceptionTest() throws ProductNotFoundECommerceException, PriceMisMatchECommerceException, EmptyCartECommerceException, ECommerceCartException {
 		CartDetails cartDetails = CartDetailsMockFactory.getDummyValuedCartDetails();
 		when(cartDataAccessRepository.findById(cartDetails.getUserId())).thenReturn(Optional.ofNullable(null));
 		eCommerceServiceImpl.placeOrder(cartDetails);

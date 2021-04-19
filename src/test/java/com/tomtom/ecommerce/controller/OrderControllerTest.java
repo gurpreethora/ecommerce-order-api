@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.tomtom.ecommerce.constants.ECommerceConstants;
+import com.tomtom.ecommerce.exception.ECommerceCartException;
 import com.tomtom.ecommerce.exception.EmptyCartECommerceException;
 import com.tomtom.ecommerce.exception.NoOrdersFoundECommerceException;
 import com.tomtom.ecommerce.exception.PriceMisMatchECommerceException;
@@ -37,14 +38,14 @@ public class OrderControllerTest {
 	
 	@Before
 	public void initMocks() {
-		MockitoAnnotations.openMocks(this);
+		MockitoAnnotations.initMocks(this);
 	}
 
 	private final String USER_ID = "userId";
 	
 	
 	@Test
-	public void placeOrderTest() throws ProductNotFoundECommerceException, PriceMisMatchECommerceException, EmptyCartECommerceException {
+	public void placeOrderTest() throws ProductNotFoundECommerceException, PriceMisMatchECommerceException, EmptyCartECommerceException, ECommerceCartException {
 		CartDetails cartDetails = CartDetailsMockFactory.getDummyValuedCartDetails();
 		OrderDetails orderDetails = OrderDetailsMockFactory.getDummyValuedOrderDetails();
 		when(commerceService.placeOrder(cartDetails)).thenReturn(orderDetails);
@@ -57,7 +58,7 @@ public class OrderControllerTest {
 	
 
 	@Test
-	public void placeOrderTest_EmptyCartECommerceException() throws EmptyCartECommerceException, ProductNotFoundECommerceException, PriceMisMatchECommerceException{
+	public void placeOrderTest_EmptyCartECommerceException() throws EmptyCartECommerceException, ProductNotFoundECommerceException, PriceMisMatchECommerceException, ECommerceCartException{
 		CartDetails cartDetails = CartDetailsMockFactory.getCartDetails();
 		when(commerceService.placeOrder(cartDetails)).thenThrow(new EmptyCartECommerceException("Cart Empty"));
 		ResponseEntity<ResponseStatus> respo = userController.placeOrder(USER_ID, cartDetails);
@@ -68,7 +69,7 @@ public class OrderControllerTest {
 	}
 	
 	@Test
-	public void placeOrderTest_ProductNotFoundECommerceException() throws EmptyCartECommerceException, ProductNotFoundECommerceException, PriceMisMatchECommerceException{
+	public void placeOrderTest_ProductNotFoundECommerceException() throws EmptyCartECommerceException, ProductNotFoundECommerceException, PriceMisMatchECommerceException, ECommerceCartException{
 		CartDetails cartDetails = CartDetailsMockFactory.getCartDetails();
 		when(commerceService.placeOrder(cartDetails)).thenThrow(new ProductNotFoundECommerceException("Product Not Found"));
 		ResponseEntity<ResponseStatus> respo = userController.placeOrder(USER_ID, cartDetails);
