@@ -57,7 +57,7 @@ public class ECommerceOrderServiceImpl implements ECommerceOrderService {
 	}
 	
 	private String getProductApiURL(){
-		return "http://" +ecommerceProductApiName +"/product/";
+		return "http://" +ecommerceProductApiName;
 	}
 	
 	private String cartApiURL() {
@@ -79,7 +79,7 @@ public class ECommerceOrderServiceImpl implements ECommerceOrderService {
 
 	public void saveProduct(Product product) throws PriceMisMatchECommerceException {
 		ResponseEntity<ResponseStatus> responseStatus = restTemplate.postForEntity(this.getProductApiURL() + "/seller/product", product, ResponseStatus.class);
-		if(!ECommerceConstants.SUCCESS.equals(responseStatus.getBody().getStatus())){
+		if(responseStatus.getBody()!=null && !ECommerceConstants.SUCCESS.equals(responseStatus.getBody().getStatus())){
 			throw new PriceMisMatchECommerceException(responseStatus.getBody().getMessages().get(0));
 		}
 	}

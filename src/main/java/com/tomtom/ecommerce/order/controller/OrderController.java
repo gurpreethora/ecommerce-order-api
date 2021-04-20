@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +45,7 @@ public class OrderController {
 	@ApiOperation( value = "Place order of products in cart")
 	@ApiResponses(value = {
 			@ApiResponse(response = List.class, message = "Success", code = 201)})
-	@PostMapping("{userId}/order")
+	@PostMapping(value = "{userId}/order",produces = MediaType.APPLICATION_JSON)
 	public ResponseEntity<ResponseStatus> placeOrder (@PathVariable @NotBlank @Size(min = 1, max = 50) String userId,
 			@RequestBody @Valid CartDetails cartDetails){
 		OrderDetails orderDetails = new OrderDetails();
@@ -65,7 +66,7 @@ public class OrderController {
 	@ApiOperation( value = "Gets order details")
 	@ApiResponses(value = {
 			@ApiResponse(response = OrderDetails.class, message = ECommerceConstants.SUCCESS, code = 200)})
-	@GetMapping (value = "orders/{orderId}")
+	@GetMapping (value = "orders/{orderId}",produces = MediaType.APPLICATION_JSON)
 	public ResponseEntity<ResponseStatus> getUserOrders (@PathVariable @NotBlank @Size(min = 1, max = 50) String orderId){
 		OrderDetails orderDetails;
 		try {

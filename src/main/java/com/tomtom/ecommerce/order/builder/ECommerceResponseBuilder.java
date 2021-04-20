@@ -27,7 +27,7 @@ public final class ECommerceResponseBuilder {
 				if(object instanceof List) {
 					List<Product> lstproducts = (List<Product>) object;
 					responseStatus.setProducts(lstproducts);
-					if(lstproducts.isEmpty() || lstproducts.size()==0) {
+					if(lstproducts.isEmpty()) {
 						responseStatus.setMessages(Arrays.asList(("No Product found")));
 					}
 				} else  if(object instanceof OrderDetails) {
